@@ -178,5 +178,23 @@ contract('Dex', (accounts) => {
                 assert(buyOrders[2].price === '9');
                 assert(sellOrders.length === 0);
             });
+
+            it('should not create limit order if token does not exist', async () => {
+                await expectRevert(
+                    dex.createLimitOrder(
+                        web3.utils.fromAscii('TOKEN-DOES-NOT-EXIST'),
+                        web3.utils.toWei('1000'),
+                        10,
+                        SELL.BUY,
+                        {from: trader1}
+                    ),
+                    'this token does not exist'
+                );
+
+            });
+
+            
+
+
                  
 });
