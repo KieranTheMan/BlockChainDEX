@@ -185,7 +185,7 @@ contract('Dex', (accounts) => {
                         web3.utils.fromAscii('TOKEN-DOES-NOT-EXIST'),
                         web3.utils.toWei('1000'),
                         10,
-                        SELL.BUY,
+                        SIDE.BUY,
                         {from: trader1}
                     ),
                     'this token does not exist'
@@ -198,7 +198,7 @@ contract('Dex', (accounts) => {
                         DAI,
                         web3.utils.toWei('1000'),
                         10,
-                        SELL.BUY,
+                        SIDE.BUY,
                         {from: trader1}
                     ),
                     'cannot trade DAI'
@@ -207,12 +207,12 @@ contract('Dex', (accounts) => {
 
             it('should not create limit order if token balance is too low', async () => {
                 await dex.deposit(
-                    web.utils.toWei('99'),
+                    web3.utils.toWei('99'),
                     REP,
                     {from: trader1}
                 );
 
-                await expectRevert()
+                await expectRevert(
                     dex.createLimitOrder(
                         REP,
                         web3.utils.toWei('100'),
@@ -223,6 +223,25 @@ contract('Dex', (accounts) => {
                     'token balance too low'
                 );
             });
+
+            it('should not create limit order if dai balance is too low', async () => {
+                await dex.deposit(
+                    web3.utils.toWei('99'),
+                    REP,
+                    {from: trader1}
+                );
+
+                await expectRevert(
+                    dex.createLimitOrder(
+                        REP,
+                        web3.utils.toWei('10'),
+                        10,
+                        SIDE.BUY,
+                        {from: trader1}
+                    ),
+                    'dai balance too low'
+                );
+            })
 
             
 
