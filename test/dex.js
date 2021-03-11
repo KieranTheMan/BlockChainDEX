@@ -190,7 +190,19 @@ contract('Dex', (accounts) => {
                     ),
                     'this token does not exist'
                 );
+            });
 
+            it('should not create limit order if token is DAI', async () => {
+                await expectRevert(
+                    dex.createLimitOrder(
+                        DAI,
+                        web3.utils.toWei('1000'),
+                        10,
+                        SELL.BUY,
+                        {from: trader1}
+                    ),
+                    'cannot trade DAI'
+                );
             });
 
             
