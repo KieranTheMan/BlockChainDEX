@@ -283,19 +283,7 @@ contract('Dex', (accounts) => {
                 assert(balances[0].toString() === web3.utils.toWei('50'));
                 assert(balances[1].toString() === web3.utils.toWei('5'));
                 assert(balances[2].toString() === web3.utils.toWei('50'));
-                assert(balances[3].toString() === web3.utils.toWei('95'))
-            })
-
-            it('should not create market order if token does not exist', async () => {
-                await expectRevert(
-                    dex.createMarketOrder(
-                        web3.utils.fromAscii('TOKEN-DOES-NOT-EXIST'),
-                        web3.utils.toWei('1000'),
-                        SIDE.BUY,
-                        {from: trader1}
-                    ),
-                    'this token does not exist'
-                );
+                assert(balances[3].toString() === web3.utils.toWei('95'));
             });
 
             it('should NOT create market order if token balance too low', async () => {
@@ -331,32 +319,26 @@ contract('Dex', (accounts) => {
                     web3.utils.toWei('101'),
                     SIDE.BUY,
                     {from: trader2}
-                  ),
-                  'dai balance too low'
-                );
+                  ),'dai balance too low');
               });
             
               it('should NOT create market order if token is DAI', async () => {
                 await expectRevert(
                   dex.createMarketOrder(
                     DAI,
-                    web3.utils.toWei('1000'),
+                    web3.utils.toWei('100'),
                     SIDE.BUY,
                     {from: trader1}
-                  ),
-                  'cannot trade DAI'
-                );
+                  ),'cannot trade DAI');
               });
-            
-              it('should NOT create market order if token does not not exist', async () => {
+
+              it('should NOT create market order if token does not exist', async () => {
                 await expectRevert(
                   dex.createMarketOrder(
                     web3.utils.fromAscii('TOKEN-DOES-NOT-EXIST'),
-                    web3.utils.toWei('1000'),
+                    web3.utils.toWei('100'),
                     SIDE.BUY,
                     {from: trader1}
-                  ),
-                  'this token does not exist'
-                );
-              });
+                  ),'this token does not exist')
+                });
 });
