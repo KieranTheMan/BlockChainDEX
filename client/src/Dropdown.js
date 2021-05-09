@@ -1,11 +1,11 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
 function Dropdown ({onSelect, activeItem, items}) {
-    const [dropDownVisible, setDropVisible] = useState(false);
+    const [dropDownVisible, setDropdownVisible] = useState(false);
 
     const selectItem = (e, item) => {
         e.preventDefault();
-        setDropdownVisible(!dropdownVisible);
+        setDropdownVisible(!dropDownVisible);
         onSelect(item);
     }
     return (
@@ -17,7 +17,8 @@ function Dropdown ({onSelect, activeItem, items}) {
             >
                     {activeItem.label}
             </button>
-            <div className={`dropdown-menu ${dropdownVisible ? 'visible' : ''}`}>
+
+            <div className={`dropdown-menu ${dropDownVisible ? 'visible' : ''}`}>
                 {items && items.map((item, i) => (
                 <a
                 className={`dropdown-item ${item.value === activeItem.value ? 'active' : null}`}
