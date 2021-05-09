@@ -12,13 +12,13 @@ function Header ({
             <div className='row'>
                 <div className= 'col-sm-3 flex'>
                     <Dropdown 
-                        items={tokens.map(token => ({
+                        items={tokens.map((token) => ({
                         label: token.ticker,
                         value: token
                     }))}
-                    activeItems={{
+                    activeItem={{
                         label: user.selectedToken.ticker,
-                        value: token
+                        value: user.selectedToken
                     }}
                     onSelect={selectToken}
                     />
@@ -32,4 +32,6 @@ function Header ({
             </div>
         </header>
     )
-}
+};
+
+export default Header;
