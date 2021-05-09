@@ -7,7 +7,7 @@ function LoadContainer() {
     const [accounts, setAccounts] = useState([]);
     const [contracts, setContracts] = useState(undefined);
 
-    useEffect( () => {
+    useEffect(() => {
         const init = async () => {
             const web3 = await getWeb3();
             const contracts = await getContracts(web3);

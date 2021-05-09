@@ -50,14 +50,9 @@ const getContracts = async web3 => {
     const tokens = await dex.methods.getTokens().call();
     const tokenContracts = tokens.reduce((acc, token) => ({
     ...acc,
-    [web3.utils.hexToUtf8(tokens.ticker)]: new web3.eth.Contract(
-        ERC20Abi,
-        token.tokenAddress
-    )
-    
-    }), {})
-    return { Dex, ...tokenContracts }
+    [web3.utils.hexToUtf8(token.ticker)]: new web3.eth.Contract(ERC20Abi, token.tokenAddress)}), {})
+    return { dex, ...tokenContracts }
 }
 
 
-export {getWeb3, getContracts}
+export { getWeb3, getContracts };
