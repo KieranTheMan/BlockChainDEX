@@ -16,8 +16,8 @@ const [DAI, BAT, REP, ZRX] = ['DAI', 'BAT', 'REP', 'ZRX']
       
 
 module.exports = async function(deployer, _network, accounts) {
+    const[trader1, trader2, trader3, trader4, _] = accounts;  
     await Promise.all([Dai, Bat, Rep, Zrx, Dex].map(contract => deployer.deploy(contract)));
-    const[trader1, trader2, trader3, trader4,_] = accounts;
     const [dai, bat, rep, zrx, dex] = await Promise.all(
         [Dai, Bat, Rep, Zrx, Dex].map(contract => contract.deployed())
     )
