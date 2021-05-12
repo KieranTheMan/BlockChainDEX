@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 const DIRECTION = {
     WITHDRAW: 'WITHDRAW',
-    DEPOSIT:    'DEPOSIT'
+    DEPOSIT:  'DEPOSIT'
 };
 
 function Wallet({deposit, withdraw, user}) {
@@ -10,11 +10,7 @@ function Wallet({deposit, withdraw, user}) {
 
     const onSubmit = e => {
         e.preventDefault();
-        if(direction === DIRECTION.DEPOSIT) {
-            deposit(amount);
-        }else{
-            withdraw(amount);
-        }
+        direction === DIRECTION.DEPOSIT ? deposit(amount) : withdraw(amount);
     }
 
     return (
